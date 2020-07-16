@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -20,7 +21,29 @@
     // 		쌓이기 때문에 fuck이 났다. 구문을 쓰거나 언어를 선택할 때 이유를 되묻고 진행하자
     // 		아직 개발자가 되기도 전인데 속도가 빨라야 나중에 이렇게 다 틀리면 아무짝에도 쓸모없다.
     // 		지금은 생각하고, 이유를 파악하는 것에만 집중하자.
-    		List<Integer> lotto = new ArrayList<>();
+    //		List<Integer> lotto = new ArrayList<>();
+    %>
+    
+    <%
+    	//강사님 코딩
+    	//<> 제네릭
+    	List<Integer> lotto =  new ArrayList<>();
+    
+    	//한 큐에 다 쓰심
+		//while 제어문 size 넣은 방법 good.
+		//boolean 안써도 됨, 제어문에 size로 설정해둬서.
+    	
+    	while(lotto.size() < 6) {
+    		int rn = (int) (Math.random()*45) + 1;
+    		//중복된게 없냐로 물어서 true 값이면 add할 요량
+    		if(!lotto.contains(rn)) {
+    			lotto.add(rn);
+    		} 
+    		
+    		Collections.sort(lotto);
+    		
+    	}
+    
     %>
     
 <!DOCTYPE html>
@@ -35,10 +58,14 @@
 	<h2>로또 번호 생성 결과!!!</h2>
 	<h3>이번 주 로또 번호는 이 번호다!!</h3>
 	
+	 <% for(int num : lotto) {
+			out.print(num + "&nbsp;&nbsp;");	 
+	 } %>
+	 
 	<%			
 	
 		
-		while(true){
+		/* while(true){
 		
 
 			int num = (int) (Math.random()*45)+1;
@@ -62,8 +89,9 @@
 		for(int j : lotto) {
 			out.print(j + " ");	
 		}	
-		
+		*/
  %>
+ 
 	
 </body>
 </html>
